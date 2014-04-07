@@ -1,0 +1,89 @@
+<html>
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<body>
+		<div id="fb-root"></div>
+		
+		<script>
+		  // Additional JS functions here
+		  window.fbAsyncInit = function() {
+			FB.init({
+			  appId      : '481439511903117', // App ID
+			  channelUrl : '//localhost/secretags/channel.html', // Channel File
+			  status     : true, // check login status
+			  cookie     : true, // enable cookies to allow the server to access the session
+			  xfbml      : true  // parse XFBML
+			});
+			
+						// Additional init code here
+			FB.getLoginStatus(function(response) {
+				if (response.status === 'connected') {
+					// connected
+					alert("hello");
+					testAPI();
+				} else if (response.status === 'not_authorized') {
+					// not_authorized
+					login();
+				} else {
+					// not_logged_in
+					login();
+				}
+			});
+			// Additional init code here
+
+		  };
+
+		  function login() {
+				FB.login(function(response) {
+					if (response.authResponse) {
+						// connected
+										alert("hello");
+										testAPI();
+					} else {
+						// cancelled
+					}
+				} , {scope: 'email,user_likes,read_friendlists,user_location,user_education_history'});
+			}
+			
+			function testAPI() {
+				console.log('Welcome!  Fetching your information.... ');
+				
+				FB.api('/me',{ fields: "email,location,picture,name,education,id,gender,work" }, function(response) {
+					console.log('Good to see you, ' + response.name + '.');
+					//alert(response.age_range.min);?type=large?redirect=false
+					alert(response.location.name);
+					senddata(response.name,response.email,response.gender,response.id,response.location.name,response.picture.data.url);
+					//,response.name,response.email,response.gender,,response.education[0].school.name,response.picture
+				});
+			}
+		  
+		  // Load the SDK Asynchronously
+		  (function(d){
+			 var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+			 if (d.getElementById(id)) {return;}
+			 js = d.createElement('script'); js.id = id; js.async = true;
+			 js.src = "//connect.facebook.net/en_US/all.js";
+			 ref.parentNode.insertBefore(js, ref);
+		   }(document));
+		</script>
+		
+			<script type="text/javascript">
+		function senddata(name,email,gender,id,location,picture)
+		{
+			alert(picture);
+			$.post("register.php", { name: name, email: email,gender: gender, id: id, location: location, pic: picture } );
+			/*xmlhttp.open( "POST", "register.php", true );
+			xmlhttp.setRequestHeader(
+				'Content-Type',
+				'application/x-www-form-urlencoded; charset=UTF-8'
+			);
+			
+			xmlhttp.send("name="+name+"&email="+email"&id="+id"&gender="+gender"&location="+location"&pic="+picture);
+			*/
+			//xmlhttp.open("POST","register.php?name="+name+"&email="+email"&id="+id"&gender="+gender"&location="+location"&pic="+picture,true);
+			//xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			//xmlhttp.send("name="+name+"&email="+email"&id="+id"&gender="+gender"&location="+location"&pic="+picture);
+		}
+		
+</script>
+	</body>
+</html>

@@ -1,0 +1,108 @@
+<?php
+
+/**
+ * A class file to connect to database
+ */
+class DB_CONNECT {
+
+    // constructor
+    function __construct() {
+        // connecting to database
+        $this->connect();
+    }
+
+    // destructor
+    function __destruct() {
+        // closing db connection
+        $this->close();
+    }
+
+    /**
+     * Function to connect with database
+     */
+    function connect() {
+        // import database connection variables
+        require_once 'db_config.php';
+
+        // Connecting to mysql database
+        $con = mysql_connect(DB_SERVER, DB_USER, DB_PASSWORD) or die(mysql_error());
+
+        // Selecing database
+        $db = mysql_select_db(DB_DATABASE) or die(mysql_error()) or die(mysql_error());
+
+        // returing connection cursor
+        return $con;
+    }
+
+    /**
+     * Function to close db connection
+     */
+    function close() {
+        // closing db connection
+        mysql_close();
+    }
+	
+	
+
+}
+function in_multiarray($elem, $array,$field)
+	{
+		$top = sizeof($array) - 1;
+		$bottom = 0;
+		while($bottom <= $top)
+		{
+			if($array[$bottom][$field] == $elem)
+				return true;
+			else 
+				if(is_array($array[$bottom][$field]))
+					if(in_multiarray($elem, ($array[$bottom][$field])))
+						return true;
+
+			$bottom++;
+		}        
+		return false;
+	}
+	
+	function search_multiarray($elem, $array,$field)
+	{
+		$top = sizeof($array) - 1;
+		$bottom = 0;
+		while($bottom <= $top)
+		{
+			if($array[$bottom][$field] == $elem)
+				return $array[$bottom]['friend_id'];
+			else 
+				if(is_array($array[$bottom][$field]))
+					if(in_multiarray($elem, ($array[$bottom][$field])))
+						return $array[$bottom]['friend_id'];
+
+			$bottom++;
+		}        
+		return false;
+	}
+	function time_elapsed_string($ptime) {
+		$etime = time() - $ptime;
+		
+		if ($etime < 1) {
+			return '0 seconds ago';
+		}
+		
+		$a = array( 12 * 30 * 24 * 60 * 60  =>  'year',
+					30 * 24 * 60 * 60       =>  'month',
+					24 * 60 * 60            =>  'day',
+					60 * 60                 =>  'hour',
+					60                      =>  'minute',
+					1                       =>  'second'
+					);
+		
+		foreach ($a as $secs => $str) {
+			$d = $etime / $secs;
+			if ($d >= 1) {
+				$r = round($d);
+				return 'posted ' .$r . ' ' . $str . ($r > 1 ? 's' : '') . ' ago';
+			}
+		}
+	}
+	$quotes = array('/"/',"/'/");
+$replacements = array('&quot;','&#39;');
+?>

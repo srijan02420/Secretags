@@ -1,0 +1,254 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+class Post extends CI_Controller {
+
+	public function __construct()
+		{
+			parent::__construct();
+			$this->load->helper('url');
+		}
+	
+	public function post_conff()
+	{
+		if (!$this->input->is_ajax_request()) {
+		   redirect('404');
+		}
+		$time = time();
+		
+		$conff = array(
+		   'conff' => $_POST['conff'] ,
+		   'gender' => $_POST['gender'],
+		   'type'	=> $_POST['type'],
+		   'time' => $time,
+		   'activity_time' => $time
+		);
+		
+		$this->security->xss_clean($conff);
+		preg_match_all('/#([\p{L}\p{Mn}]+)/u',$_POST['conff'],$matches);
+		$this->db->insert('conff', $conff); 
+									
+		$last_conff_id = $this->db->insert_id();
+		echo $last_conff_id;		
+		if(sizeof($matches[1])>0)
+		{
+			$tags = $matches[1];
+			for($i=0;$i<sizeof($tags);$i++)
+			{
+				$tag = $tags[$i];
+				$this->db->select('tag_id');
+				$this->db->where('tag', $tag); 
+				$check = $this->db->get('tag');
+				//$check = mysql_query("SELECT * FROM tag WHERE tag = '$tag' ");
+
+				if($check->num_rows()==0)
+				{
+					$tag_array = array(
+					   'time' => $time,
+					   'tag' => $tag ,
+					   'user_id' => '0' 
+					);
+			
+					$this->db->insert('tag', $tag_array);
+					// mysql_query("INSERT INTO tag (tag,user_id) 
+												// VALUES ('$tag','$user_id')");
+					$last_tag_id = $this->db->insert_id();
+				}
+				else
+					{
+					$last_tag_array = $check->row_array();
+					$last_tag_id = $last_tag_array['tag_id'];
+					}
+				
+				// $this->db->select('id');
+				// $this->db->where('tag_id', $last_tag_id); 
+				// $this->db->where('user_id', $_POST['user_id']); 
+				// $check_user_tag = $this->db->get('user_tag');
+				// $check_user_tag = mysql_query("SELECT * FROM user_tag WHERE user_id = '$user_id' AND tag_id = '$last_tag_id' ");
+				// if($check_user_tag->num_rows()==0)
+				// {
+					// $tag_array = array(
+					   // 'tag_id' => $last_tag_id ,
+					   // 'time' => $time,
+					   // 'user_id' => $_POST['user_id'] 
+					// );
+			
+					// $this->db->insert('user_tag', $tag_array);
+					// mysql_query("INSERT INTO user_tag (tag_id,user_id) 
+												// VALUES ('$last_tag_id','$user_id')");
+				// }
+				
+				$tag_array = array(
+					   'tag_id' => $last_tag_id ,
+					   'conff_id' => $last_conff_id 
+					);
+			
+					$this->db->insert('conff_tag', $tag_array);
+				// mysql_query("INSERT INTO conff_tag (conff_id,tag_id) 
+											// VALUES ('$last_conff_id','$last_tag_id')");
+			}
+		
+		}
+		
+	}
+
+	public function share_conff()
+	{
+		if (!$this->input->is_ajax_request()) {
+		   redirect('404');
+		}	
+		$time = time();
+		
+		$conff = array(
+		   'conff_id' => $_POST['conff_id'] ,
+		   'user_id' => $_POST['user_id'] ,
+		   'time' => $time
+		);
+		$share = "share";
+		$r = 1;
+		$this->security->xss_clean($conff);
+		
+		$this->db->where('conff_id', $conff['conff_id']);
+		$this->db->set('share', 'share+1', FALSE);
+		$this->db->update('conff');
+						
+		$this->db->select('id');
+		$this->db->where('user_id', $conff['user_id']); 
+		$this->db->where('conff_id', $conff['conff_id']); 
+		$check = $this->db->get('user_share');
+		if($check->num_rows()==0)
+				{			
+					$this->db->insert('user_share', $conff);
+				}	
+	}
+	
+	public function like_conff()
+	{
+		if (!$this->input->is_ajax_request()) {
+		   redirect('404');
+		}
+		$time = time();
+		
+		$conff = array(
+		   'conff_id' => $_POST['conff_id'] ,
+		   'user_id' => $_POST['user_id'] ,
+		   'time' => $time
+		);
+		
+		$this->security->xss_clean($conff);
+			
+				
+		$this->db->select('id');
+		$this->db->where('user_id', $conff['user_id']); 
+		$this->db->where('conff_id', $conff['conff_id']); 
+		$check = $this->db->get('conff_like');
+		if($check->num_rows()==0)
+				{			
+					$this->db->insert('conff_like', $conff);
+					
+					$this->db->where('conff_id', $conff['conff_id']);
+					$this->db->update('conff', array('activity_time' => $time));
+				}
+		else
+			{
+			$this->db->where('user_id', $conff['user_id']); 
+			$this->db->where('conff_id', $conff['conff_id']); 
+			$this->db->delete('conff_like'); 
+			}
+	}
+
+	public function like_comment()
+	{
+		if (!$this->input->is_ajax_request()) {
+		   redirect('404');
+		}
+		$time = time();
+		$conff = array(
+		   'comment_id' => $_POST['comment_id'] ,
+		   'user_id' => $_POST['user_id'] ,
+		   'time' => $time
+		);
+		
+		$this->security->xss_clean($conff);
+			
+		$this->db->select('id');
+		$this->db->where('user_id', $conff['user_id']); 
+		$this->db->where('comment_id', $conff['comment_id']); 
+		$check = $this->db->get('comment_like');
+		if($check->num_rows()==0)
+				{			
+					$this->db->insert('comment_like', $conff);
+					
+					//$get_who_commented = mysql_query("SELECT * FROM comment WHERE comment_id = '$comment_id'");
+					$this->db->select('conff_id');
+					$this->db->where('comment_id', $conff['comment_id']); 
+					$row = $this->db->get('comment');
+					
+					$this->db->where('conff_id', $conff['conff_id']);
+					$this->db->update('conff', array('activity_time' => $time));
+				}
+		else
+			{
+			$this->db->where('user_id', $conff['user_id']); 
+			$this->db->where('comment_id', $conff['comment_id']);
+			$this->db->delete('comment_like'); 
+			}
+	}
+
+	public function post_comment()
+	{
+		if (!$this->input->is_ajax_request()) {
+		   redirect('404');
+		}
+		$user = $_POST['user_id'];
+		if($_POST['gender'] != 0)
+			$user = 0;
+		$time = time();
+		$conff = array(
+		   'conff_id' => $_POST['conff_id'] ,
+		   'user_id' => $user ,
+		   'comment' => $_POST['comment'] ,
+		   'gender' => $_POST['gender'] ,
+		   'time' => $time
+		);
+		
+		$this->security->xss_clean($conff);
+					
+		$this->db->insert('comment', $conff);
+		$this->db->update('conff', array('activity_time' => $time), array('conff_id' => $conff['conff_id']));	//check it
+				
+	}
+
+	public function follow_tag()
+	{
+		if (!$this->input->is_ajax_request()) {
+		   redirect('404');
+		}
+		$time = time();
+		
+		$tag = array(
+		   'tag_id' => $_POST['tag_id'] ,
+		   'user_id' => $_POST['user_id'] ,
+		   'time' => $time
+		);
+		
+		$this->security->xss_clean($tag);
+			
+		$this->db->select('id');
+		$this->db->where('user_id', $tag['user_id']); 
+		$this->db->where('tag_id', $tag['tag_id']); 
+		$check = $this->db->get('user_tag');
+		if($check->num_rows()==0)
+			{			
+				$this->db->insert('user_tag', $tag);
+			}
+		else
+			{
+				$this->db->where('user_id', $tag['user_id']); 
+				$this->db->where('tag_id', $tag['tag_id']); 
+				$this->db->delete('user_tag'); 
+			}
+	}
+}
+
+/* End of file welcome.php */
+/* Location: ./application/controllers/welcome.php */

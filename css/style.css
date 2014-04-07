@@ -1,0 +1,59 @@
+.loading-bar {
+	padding: 6px 10px;
+	display: block;
+	text-align: center;
+	margin: 20px 0;
+	font-size: 1.2em;
+	font-family: "museo-sans", sans-serif;
+	margin-right: 1px;
+	font-weight: bold;
+	cursor: pointer;
+	position: relative;
+	color:black;
+}
+
+.loading-bar:hover {
+	box-shadow: inset 0px 45px 30px -40px rgba(0, 0, 0, 0.05);
+}
+
+.special {
+	font-size:18px; margin-right: 10px;
+}
+.special a{
+	color:#002E5C;
+}
+.conff_photo{
+	margin-left:10px; margin-top:10px; background:white; border-radius:4px; box-shadow: 0px 0px 10px #000000;
+}
+.conff_photo .gender {
+	width:84px;
+	border-radius:4px;
+}
+.conff_photo .type{
+	width:30px;
+	margin-top:79px; margin-left:-32px; position:absolute;
+}
+.conff_box{
+	margin-right:10px; margin-top:10px; margin-bottom:10px; background: rgba(255,255,255,0.6); border-radius:2px; box-shadow: 0px 0px 10px #171717;
+}
+.conff_box .conff_tag{
+	padding: 4px; font-size:16px;
+}
+.conff_box .conff_body{
+	padding-top: 6px;
+}
+.conff_box .activity{
+	margin-left: 10px; margin-right: 10px;
+}
+.conff_box .comment_box{
+	margin-bottom:0px; 
+}
+.conff_box .comment_box .comment_here{
+	background: #DCDCE8; width:100%; padding-top:0px; border-radius : 0px;
+}
+.conff_box .comment_box .comment_here .comment_text{
+	width:100%; resize:none; border-radius : 0px;  margin : 0 auto;
+}
+.divider_left{
+	width:100%; padding-left: 0%
+}
