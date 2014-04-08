@@ -12,6 +12,10 @@ require_once '../functions/db_connect.php';
 $db = new DB_CONNECT();
 $_POST['first'] = 1;
 
+$_POST['user_id'] = '100001010584091';
+$_POST['offset'] = 0;
+$_POST['number'] = 10;
+
 $user_id = $_POST['user_id'];
 $offset = is_numeric($_POST['offset']) ? $_POST['offset'] : die();
 $postnumbers = is_numeric($_POST['number']) ? $_POST['number'] : die();
@@ -24,6 +28,8 @@ $liked_comment = array();
 $text = "SELECT * FROM conff";
 
 $get_conff = mysql_query(" $text ORDER BY time DESC LIMIT ".$postnumbers." OFFSET ".$offset);
+
+//echo mysql_num_rows($get_conff);
 						$response["conff"] = array();
 				if (mysql_num_rows($get_conff) > 0) 
 				{
@@ -162,15 +168,16 @@ $get_conff = mysql_query(" $text ORDER BY time DESC LIMIT ".$postnumbers." OFFSE
 								
 								// push single product into final response array
 								array_push($response["conff"], $conff);
-								//echo $conff["conff_id"];\\
+								//print_r($conff);
 							}
 						}
 				
 							// success
 							$response["success"] = 1;
-
+							
 							// echoing JSON response
-							echo json_encode($response, JSON_UNESCAPED_UNICODE);
+							echo json_encode($response);
+							
 				
 				
 		} else {
@@ -179,7 +186,7 @@ $get_conff = mysql_query(" $text ORDER BY time DESC LIMIT ".$postnumbers." OFFSE
     $response["message"] = "No products found";
 
     // echo no users JSON
-    echo json_encode($response, JSON_UNESCAPED_UNICODE);
+    echo json_encode($response);
 }
 
 ?>

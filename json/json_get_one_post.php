@@ -133,7 +133,7 @@ $time = time();
 							$response["success"] = 1;
 
 							// echoing JSON response
-							echo json_encode($response, JSON_UNESCAPED_UNICODE);
+							echo json_encode($response);
 				} else {
     // no products found
     $response["success"] = 0;
@@ -177,7 +177,7 @@ $time = time();
 	}
 
     // echo no users JSON
-    echo json_encode($response, JSON_UNESCAPED_UNICODE);
+    echo json_encode($response);
 }
 
 ?>

@@ -3,7 +3,7 @@
 				function refreshTags(user_id,all)
 				{
 					// Open an AJAX call to the server's Long Poll PHP file
-					$.get("http://riklr.com/json/json_get_user_tags.php", 
+					$.get("http://localhost/Secretags/json/json_get_user_tags.php", 
 					//async = true,
 					{ user_id : user_id})
 					.done(function(data)
@@ -21,11 +21,11 @@
 									
 									if(i==8 && all==0)
 										break;
-									varhtml = varhtml+'<a href="http://riklr.com/tags/tag/'+tag.tag_id+'"><li class="label label-info" >#'+tag.tag+'</li></a><li class = "muted" > x '+tag.total_posts+'</li></br>';
+									varhtml = varhtml+'<a href="http://localhost/Secretags/tags/tag/'+tag.tag_id+'"><li class="label label-info" >#'+tag.tag+'</li></a><li class = "muted" > x '+tag.total_posts+'</li></br>';
 								}
 								//alert(data);
 								if(all==0)
-									varhtml = varhtml+'<a href="http://riklr.com/tags/tag/'+tag.tag_id+'" onClick="refreshTags('+user_id+',1); return false;"><li id="more_tags">more</li><b class="caret"></b></a>';
+									varhtml = varhtml+'<a href="http://localhost/Secretags/tags/tag/'+tag.tag_id+'" onClick="refreshTags('+user_id+',1); return false;"><li id="more_tags">more</li><b class="caret"></b></a>';
 									
 									
 									

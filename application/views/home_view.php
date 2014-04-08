@@ -123,14 +123,14 @@ $(document).ready(function() {
 				<div class="well sidebar-nav " style = "box-shadow: 0px 0px 10px #171717; " >
 					<div class="row-fluid"  >
 						<div class="span3 "  >	
-							<a href="http://riklr.com/home/profile/<?=$user_id?>">
+							<a href="http://localhost/Secretags/home/profile/<?=$user_id?>">
 								<img src="<?=$photo?>">		
 							</a>
 						</div>
 				
 						<div class="span9 "  >				
-							<a href="http://riklr.com/home/profile/<?=$user_id?>"><strong><?=$name?>&nbsp;</strong></a>
-							<p class="muted"><a href="http://riklr.com/home/profile/<?=$user_id?>" class="muted">View profile</a></p>
+							<a href="http://localhost/Secretags/home/profile/<?=$user_id?>"><strong><?=$name?>&nbsp;</strong></a>
+							<p class="muted"><a href="http://localhost/Secretags/home/profile/<?=$user_id?>" class="muted">View profile</a></p>
 						</div>
 					</div>
 					<ul class="nav nav-list"><!----Divider------------------>

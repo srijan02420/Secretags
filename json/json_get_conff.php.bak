@@ -255,7 +255,7 @@ $query_comment = mysql_query("SELECT * FROM comment where $friends limit $all ;"
 							$response["success"] = 1;
 
 							// echoing JSON response
-							echo json_encode($response, JSON_UNESCAPED_UNICODE);
+							echo json_encode($response);
 				}
 				
 		} else {
@@ -264,7 +264,7 @@ $query_comment = mysql_query("SELECT * FROM comment where $friends limit $all ;"
     $response["message"] = "No products found";
 
     // echo no users JSON
-    echo json_encode($response, JSON_UNESCAPED_UNICODE);
+    echo json_encode($response);
 }
 
 ?>

@@ -226,9 +226,9 @@
 			alert(name);
 			$.post("http://localhost/Secretags/signup/register", { name: name, email: email,gender: gender, id: id, location: location, pic: picture,friends: fb } )
 			.done(function(data) {
-				//alert("Data Loaded: " + data);
-				$( "#loading" ).hide();
-				self.location="http://localhost/Secretags/session?id="+id;
+				alert("Data Loaded: " + data);
+				//$( "#loading" ).hide();
+				//self.location="http://localhost/Secretags/session?id="+id;
 				
 			});
 			

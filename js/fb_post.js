@@ -19,9 +19,9 @@
 					id = response.authResponse.userID;
 					//alert(id);
 				} else if (response.status === 'not_authorized') {
-					//self.location="http://riklr.com/landing";
+					//self.location="http://localhost/Secretags/landing";
 				} else {
-					//self.location="http://riklr.com/landing";
+					//self.location="http://localhost/Secretags/landing";
 				}
 			});
 
@@ -41,8 +41,8 @@
 		FB.ui(
 		  {
 			method: 'feed',
-          link: 'http://riklr.com/secretpost/post/'+conff_id,
-          picture: 'http://riklr.com/images/'+gender+'.jpg',
+          link: 'http://localhost/Secretags/secretpost/post/'+conff_id,
+          picture: 'http://localhost/Secretags/images/'+gender+'.jpg',
           name: type,
           caption: tags,
           description: conff
@@ -62,7 +62,7 @@
 		  function logout() {
 				FB.logout(function(response) {
 					  // user is now logged out
-					  self.location="http://riklr.com/session/logout";
+					  self.location="http://localhost/Secretags/session/logout";
 					});
 				
 			}
@@ -124,7 +124,7 @@
 		   
 		function share(conff_id){
 			
-		   $.post("http://riklr.com/post/share_conff", { conff_id: conff_id,user_id: id} )
+		   $.post("http://localhost/Secretags/post/share_conff", { conff_id: conff_id,user_id: id} )
 			.done(function(data) {
 				//longPollpost(id,conff_id);
 			});
@@ -144,10 +144,10 @@
 				$('.nooflikes'+conff_id).html(parseInt($('.nooflikes'+conff_id).html())+1);
 				}
 				
-		   $.post("http://riklr.com/post/like_conff", { conff_id: conff_id, user_id: id } )
+		   $.post("http://localhost/Secretags/post/like_conff", { conff_id: conff_id, user_id: id } )
 			.done(function(data) {
 				//longPollpost(id,conff_id);
-				liketofb('http://riklr.com/secretpost/post/'+conff_id);
+				liketofb('http://localhost/Secretags/secretpost/post/'+conff_id);
 			});
 			
 			}
@@ -163,7 +163,7 @@
 				$(i).html("Unlike");
 				$('.noofcommentlikes'+comment_id).html(parseInt($('.noofcommentlikes'+comment_id).html())+1);
 				}
-		   $.post("http://riklr.com/post/like_comment", { comment_id: comment_id, user_id: id } )
+		   $.post("http://localhost/Secretags/post/like_comment", { comment_id: comment_id, user_id: id } )
 			.done(function(data) {
 				//longPollpost(id,conff_id);
 				//$("#"+conff_id).toggle(500);
@@ -173,19 +173,19 @@
 		function add_comment(conff_id){
 			if($('#commnt'+conff_id).val().length > 0)
 			{
-			   $.post("http://riklr.com/post/post_comment", { gender: $('#gender'+conff_id).val(), user_id: id, conff_id: conff_id, comment: $('#commnt'+conff_id).val().replace(/\n/g, "<br />") } )
+			   $.post("http://localhost/Secretags/post/post_comment", { gender: $('#gender'+conff_id).val(), user_id: id, conff_id: conff_id, comment: $('#commnt'+conff_id).val().replace(/\n/g, "<br />") } )
 				.done(function(data) {
 					longPollpost(id,conff_id);
 					$('#commnt'+conff_id).val('');
 					if($('#gender'+conff_id).val() == 0)
-						commenttofb('http://riklr.com/secretpost/post/'+conff_id);
+						commenttofb('http://localhost/Secretags/secretpost/post/'+conff_id);
 				});
 			}
 			else
 				alert("You forgot to write anything!");
 			}
 		function delete_comment(comment_id){
-		   $.post("http://riklr.com/del_comment.php", { comment_id: comment_id } )
+		   $.post("http://localhost/Secretags/del_comment.php", { comment_id: comment_id } )
 			.done(function(data) {
 				longPoll(id,0) ;
 			});
@@ -193,7 +193,7 @@
 		
 		function follow_tag(tag_id,user_id){
 		//alert(tag_id);
-		   $.post("http://riklr.com/post/follow_tag", { tag_id: tag_id ,user_id : user_id} )
+		   $.post("http://localhost/Secretags/post/follow_tag", { tag_id: tag_id ,user_id : user_id} )
 			.done(function(data) {
 				location.reload();
 			});
@@ -201,7 +201,7 @@
 		
 		function refreshScore(id)
 		{
-			$.get("http://riklr.com/json/json_get_scoreboard.php", 
+			$.get("http://localhost/Secretags/json/json_get_scoreboard.php", 
 					//async = true,
 					{ user_id : id})
 					.done(function(data)

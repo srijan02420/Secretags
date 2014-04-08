@@ -37,7 +37,7 @@
 	
     <style>
       body {
-        background: url('http://riklr.com/images/dottedtexture5.jpg');
+        background: url('http://localhost/Secretags/images/dottedtexture5.jpg');
 		background-repeat:repeat-y;
 		background-size:100% 28px;
 		background-attachment:fixed;
@@ -78,7 +78,7 @@
     <![endif]-->
 
     <!-- Fav and touch icons -->
-    <link rel="shortcut icon" href="http://riklr.com/images/fav.png">
+    <link rel="shortcut icon" href="http://localhost/Secretags/images/fav.png">
    				   
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
 	<script src="<?=site_url('bootstrap/js/jquery.autosize-min.js')?>"></script>
@@ -170,14 +170,14 @@ margin:0 auto;}
 	<div id="fb-root"></div>
 	<script src="<?=site_url('js/fb.js')?>"></script>
 	<div id="loading">
-		<img src="http://riklr.com/images/downloader.gif"/>
+		<img src="http://localhost/Secretags/images/downloader.gif"/>
 	</div>
 <!--header-->
     <div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container" style="width:90%;">
 				 
-				  <a class="brand" href="<?=site_url('home')?>"> <img src="http://riklr.com/images/logo.png" class="pull-left" width = "35px" ></a>
+				  <a class="brand" href="<?=site_url('home')?>"> <img src="http://localhost/Secretags/images/logo.png" class="pull-left" width = "35px" ></a>
 				  <a class="brand" href="<?=site_url('home')?>"><strong>Riklr</strong></a>
 				  <div class="nav-collapse collapse">
 					<ul class="nav">

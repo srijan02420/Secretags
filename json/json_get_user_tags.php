@@ -35,5 +35,5 @@ require_once '../functions/db_connect.php';
 				$response["success"] = 1;
 
 							// echoing JSON response
-				echo json_encode($response, JSON_UNESCAPED_UNICODE);
+				echo json_encode($response);
 ?>

@@ -1,9 +1,7 @@
 <?php
-
 /*
  * Following code will list all the products
  */
-
 // array for JSON response
 $response = array();
 
@@ -12,33 +10,83 @@ require_once '../functions/db_connect.php';
 
 // connecting to db
 $db = new DB_CONNECT();
+$_POST['first'] = 1;
 
-$conff_id = $_GET['conff_id'];
-$user_id = $_GET['user_id'];
+$user_id = $_POST['user_id'];
+$offset = is_numeric($_POST['offset']) ? $_POST['offset'] : die();
+$postnumbers = is_numeric($_POST['number']) ? $_POST['number'] : die();
 $time = time();
-		$get_conff = mysql_query("SELECT * FROM conff where conff_id = $conff_id ;");
-			$response["conff"] = array();
-			if (mysql_num_rows($get_conff) > 0) 
-			{
+$conff = array();
+$liked_arr = array();
+$commented = array();
+$liked_comment = array();
+
+$text = "SELECT * FROM conff where conff_id IN
+			(SELECT conff_id
+					FROM conff_tag
+					INNER JOIN user_tag ON conff_tag.tag_id = user_tag.tag_id
+					WHERE user_tag.user_id = $user_id
+				UNION 
+			SELECT conff_id
+					FROM conff_like
+					INNER JOIN user_friend ON conff_like.user_id = user_friend.friend_id
+					WHERE user_friend.user_id = $user_id
+				UNION 
+			SELECT conff_id
+					FROM comment 
+					INNER JOIN user_friend ON comment.user_id = user_friend.friend_id
+					WHERE user_friend.user_id = $user_id)";
+
+$get_conff = mysql_query(" $text ORDER BY activity_time DESC LIMIT ".$postnumbers." OFFSET ".$offset);
+						$response["conff"] = array();
+//print_r("$text ORDER BY activity_time DESC LIMIT ".$postnumbers." OFFSET ".$offset);
+				if (mysql_num_rows($get_conff) > 0) 
+				{
 					//print_r(mysql_num_rows($get_conff));
-				$row = mysql_fetch_assoc($get_conff);
+						while($row = mysql_fetch_array($get_conff))
+						{
+							if( $time - $row['activity_time'] < 50 || $_POST['first']==1){
 								$time = time_elapsed_string($row['time']);
-								
+								$activity_time = $row['activity_time'];
+								//echo time();
+								//echo $row->conff_id;
+								$conff_id = $row['conff_id'];
 								$get_likes = mysql_query("SELECT * FROM conff_like where conff_id = ".$conff_id." ;");
 								$total_likes = mysql_num_rows($get_likes);
 								if($total_likes==null)
 									$total_likes = 0;
 								
-								$liked = false;
-								while($row1 = mysql_fetch_array($get_likes))
-								{
-									if($row1['user_id']==$user_id)
-										$liked = true;
-									//print_r($row->user_id);
-									 
+								$commenter = array();
+								$liker = array();
+								/*for special */
+								$special_comment = mysql_query("SELECT user_id FROM comment where user_id IN
+															(SELECT user_friend.friend_id
+															FROM user_friend where user_id = $user_id) 
+															and conff_id = $conff_id or user_id = $user_id and conff_id = $conff_id
+															ORDER BY comment.time DESC ");
+								while($row1 = mysql_fetch_assoc($special_comment)) {
+									$commenter_id = $row1['user_id']; 
+									$special_comment_details = mysql_query("SELECT name,user_id,time FROM users where user_id = $commenter_id ");
+									$commenter_details = mysql_fetch_assoc($special_comment_details);	
+									array_push($commenter, $commenter_details);
 								}
-								$conff = array();
-								// temp user array
+								
+								$special_like = mysql_query("SELECT user_id FROM conff_like where user_id IN
+															(SELECT user_friend.friend_id
+															FROM user_friend where user_id = $user_id) 
+															and conff_id = $conff_id or user_id = $user_id and conff_id = $conff_id
+															ORDER BY conff_like.time DESC ");
+								while($row1 = mysql_fetch_assoc($special_like)) {
+									$liker_id = $row1['user_id']; 
+									$special_liker_details = mysql_query("SELECT name,user_id,time FROM users where user_id = $liker_id ");
+									$liker_details = mysql_fetch_assoc($special_liker_details);	
+									array_push($liker, $liker_details);
+								}
+								if(in_multiarray($user_id,$liker,'user_id'))
+									$liked = true;
+								else 
+									$liked = false;
+								
 								
 								$get_who_is = mysql_query("SELECT * FROM users where user_id = ".$user_id." ;");
 								$get_who_is_info = mysql_fetch_row($get_who_is);
@@ -46,7 +94,6 @@ $time = time();
 								$name = $get_who_is_info[2];
 														
 								// temp user array
-								
 								$conff["conff_id"] = $row['conff_id'];
 								$conff["conff"] = preg_replace($quotes,$replacements,$row["conff"]);
 								$conff["type"] = $row["type"];
@@ -56,8 +103,11 @@ $time = time();
 								$conff["user_liked"] = $liked;
 								$conff["total_likes"] = $total_likes;
 								$conff["user_name"] = $name;
+								$conff["user_id"] = $user_id;
 								$conff["photo"] = $s_pic;
-								
+								$conff["activity_time"] = $activity_time;
+								$conff["liker"] = $liker;
+								$conff["commenter"] = $commenter;
 								$conff["tags"] = array();
 								
 						
@@ -92,11 +142,11 @@ $time = time();
 											$total_likes_comments = mysql_num_rows($get_likes_comments);
 											if($total_likes_comments==null)
 												$total_likes_comments = 0;
-											$liked = false;
+											$liked_com = false;
 											while($row1 = mysql_fetch_array($get_likes_comments))
 											{
 												if($row1['user_id']==$user_id)
-													$liked = true;
+													$liked_com = true;
 												//print_r($row->user_id);
 												 
 											}
@@ -114,11 +164,11 @@ $time = time();
 											$comment["comment"] = preg_replace($quotes,$replacements,$row['comment']);
 											$comment["gender"] = $row["gender"];
 											$comment["time"] = $time;
-											$comment["user_liked"] = $liked;
+											$comment["user_liked"] = $liked_com;
 											$comment["total_likes"] = $total_likes_comments;
 											$comment["user_name"] = $name;
 											$comment["photo"] = $s_pic;
-																						
+											
 											array_push($conff["comment"], $comment);
 									}
 								
@@ -128,12 +178,17 @@ $time = time();
 								// push single product into final response array
 								array_push($response["conff"], $conff);
 								//echo $conff["conff_id"];\\
-							
+							}
+						}
+				
+							// success
 							$response["success"] = 1;
 
 							// echoing JSON response
 							echo json_encode($response);
-				} else {
+				
+				
+		} else {
     // no products found
     $response["success"] = 0;
     $response["message"] = "No products found";

@@ -216,7 +216,7 @@ $query_comment = mysql_query("SELECT * FROM comment where user_id = $user_id lim
 							$response["success"] = 1;
 
 							// echoing JSON response
-							echo json_encode($response, JSON_UNESCAPED_UNICODE);
+							echo json_encode($response);
 				}
 				
 		} else {

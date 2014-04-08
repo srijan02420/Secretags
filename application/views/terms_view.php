@@ -38,7 +38,7 @@
     <![endif]-->
 
     <!-- Fav and touch icons -->
-	<link rel="shortcut icon" href="http://riklr.com/images/fav.png">
+	<link rel="shortcut icon" href="http://localhost/Secretags/images/fav.png">
 								   
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
 	<script src="<?=site_url('bootstrap/js/bootstrap-select.min.js');?>"></script>

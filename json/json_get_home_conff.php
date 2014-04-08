@@ -12,6 +12,11 @@ require_once '../functions/db_connect.php';
 $db = new DB_CONNECT();
 $_POST['first'] = 1;
 
+
+$_POST['user_id'] = '100001010584091';
+$_POST['offset'] = 0;
+$_POST['number'] = 10;
+
 $user_id = $_POST['user_id'];
 $offset = is_numeric($_POST['offset']) ? $_POST['offset'] : die();
 $postnumbers = is_numeric($_POST['number']) ? $_POST['number'] : die();
@@ -39,6 +44,7 @@ $text = "SELECT * FROM conff where conff_id IN
 
 $get_conff = mysql_query(" $text ORDER BY activity_time DESC LIMIT ".$postnumbers." OFFSET ".$offset);
 						$response["conff"] = array();
+//print_r("$text ORDER BY activity_time DESC LIMIT ".$postnumbers." OFFSET ".$offset);
 				if (mysql_num_rows($get_conff) > 0) 
 				{
 					//print_r(mysql_num_rows($get_conff));
@@ -184,7 +190,7 @@ $get_conff = mysql_query(" $text ORDER BY activity_time DESC LIMIT ".$postnumber
 							$response["success"] = 1;
 
 							// echoing JSON response
-							echo json_encode($response, JSON_UNESCAPED_UNICODE);
+							echo json_encode($response);
 				
 				
 		} else {
@@ -193,7 +199,7 @@ $get_conff = mysql_query(" $text ORDER BY activity_time DESC LIMIT ".$postnumber
     $response["message"] = "No products found";
 
     // echo no users JSON
-    echo json_encode($response, JSON_UNESCAPED_UNICODE);
+    echo json_encode($response);
 }
 
 ?>

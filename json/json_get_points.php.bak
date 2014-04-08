@@ -53,7 +53,7 @@ $query_shares = mysql_query("SELECT id FROM user_share where user_id = $user_id 
 							$response["success"] = 1;
 
 							// echoing JSON response
-							echo json_encode($response, JSON_UNESCAPED_UNICODE);
+							echo json_encode($response);
 				
 	
 

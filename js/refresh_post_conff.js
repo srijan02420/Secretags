@@ -4,7 +4,7 @@
 				{
 					//alert(user_id);
 					// Open an AJAX call to the server's Long Poll PHP file
-					$.get("http://riklr.com/json/json_get_refresh_post.php", 
+					$.get("http://localhost/Secretags/json/json_get_refresh_post.php", 
 					//async = true,
 					{ user_id : user_id, conff_id:conff_id })
 					.done(function(data)
@@ -34,9 +34,9 @@
 									else
 										comment_liked = 'Like';
 										var com_photo = comm.photo;
-										var link = 'http://riklr.com/home/profile/'+comm.user_id;
+										var link = 'http://localhost/Secretags/home/profile/'+comm.user_id;
 										if(comm.gender != 0)
-											{com_photo = 'http://riklr.com/images/'+comm.gender+'.jpg';
+											{com_photo = 'http://localhost/Secretags/images/'+comm.gender+'.jpg';
 											link = '#';
 											if(comm.gender == 1)
 												comm.user_name = 'Anon male';

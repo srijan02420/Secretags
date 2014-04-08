@@ -31,12 +31,12 @@ class Session extends CI_Controller {
 			else{
 				$id = $_GET['id'];
 				$_SESSION['id'] = $id;
-				header ('Location: http://riklr.com/home');
+				header ('Location: http://localhost/Secretags/home');
 			}
 		}
 		
 		else
-			header ('Location: http://riklr.com/landing');
+			header ('Location: http://localhost/Secretags/landing');
 	//$this->load->view('test_view');
 	}
 	
@@ -44,6 +44,6 @@ class Session extends CI_Controller {
 	{
 		session_start();
 		session_destroy();
-		header ('Location: http://riklr.com/landing');
+		header ('Location: http://localhost/Secretags/landing');
 	}
 }

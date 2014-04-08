@@ -9,12 +9,12 @@
     <!-- Le styles -->
     <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
 	<!-- Fav and touch icons -->
-	<link rel="shortcut icon" href="http://riklr.com/images/fav.png">
+	<link rel="shortcut icon" href="http://localhost/Secretags/images/fav.png">
 	
 	<style>
       body {
         padding-top: 0px; /* 60px to make the container go all the way to the bottom of the topbar */
-        background: url('http://riklr.com/images/dottedtexture5.jpg');
+        background: url('http://localhost/Secretags/images/dottedtexture5.jpg');
 		background-repeat:repeat-y;
 		background-size:100% 28px;
 		background-attachment:fixed;

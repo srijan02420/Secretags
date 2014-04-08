@@ -143,7 +143,7 @@ $conff = array();
 							$response["password"] = $password;
 
 							// echoing JSON response
-							echo json_encode($response, JSON_UNESCAPED_UNICODE);
+							echo json_encode($response);
 				
 				
 		} else {
@@ -152,7 +152,7 @@ $conff = array();
     $response["message"] = "No products found";
 
     // echo no users JSON
-    echo json_encode($response, JSON_UNESCAPED_UNICODE);
+    echo json_encode($response);
 }
 
 function time_elapsed_string($ptime) {

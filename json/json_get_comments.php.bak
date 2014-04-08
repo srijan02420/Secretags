@@ -72,7 +72,7 @@ $get_comments = mysql_query("SELECT * FROM comment ;");
 							$response["success"] = 1;
 
 							// echoing JSON response
-							echo json_encode($response, JSON_UNESCAPED_UNICODE);
+							echo json_encode($response);
 							
 				} else {
     // no products found
@@ -80,7 +80,7 @@ $get_comments = mysql_query("SELECT * FROM comment ;");
     $response["message"] = "No products found";
 
     // echo no users JSON
-    echo json_encode($response, JSON_UNESCAPED_UNICODE);
+    echo json_encode($response);
 }
 
 

@@ -103,7 +103,7 @@ while($row = mysql_fetch_array($get_friends))
 							$response["success"] = 1;
 
 							// echoing JSON response
-							echo json_encode($response, JSON_UNESCAPED_UNICODE);
+							echo json_encode($response);
 				
 	
 

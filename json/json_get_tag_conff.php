@@ -175,7 +175,7 @@ $get_conff = mysql_query(" $text ORDER BY time DESC LIMIT ".$postnumbers." OFFSE
 							$response["success"] = 1;
 
 							// echoing JSON response
-							echo json_encode($response, JSON_UNESCAPED_UNICODE);
+							echo json_encode($response);
 				
 				
 		} else {
@@ -184,7 +184,7 @@ $get_conff = mysql_query(" $text ORDER BY time DESC LIMIT ".$postnumbers." OFFSE
     $response["message"] = "No products found";
 
     // echo no users JSON
-    echo json_encode($response, JSON_UNESCAPED_UNICODE);
+    echo json_encode($response);
 }
 
 ?>

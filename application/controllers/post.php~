@@ -215,6 +215,9 @@ class Post extends CI_Controller {
 	
 		$time = time();
 		
+		$_POST['user_id'] = '100001010584091';
+		$_POST['tag_id'] = 1;
+
 		$tag = array(
 		   'tag_id' => $_POST['tag_id'] ,
 		   'user_id' => $_POST['user_id'] ,

@@ -80,7 +80,7 @@ class Signup extends CI_Controller {
 						}
 				}	
 		}
-		//echo "Hello it is";
+		echo "Hello it is";
 	}
 	
 }

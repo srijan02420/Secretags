@@ -3,8 +3,9 @@ require_once '../functions/db_connect.php';
 
     // connecting to db
     $db = new DB_CONNECT();
-	$tag_id = $_GET['tag_id'];
-	$user_id = $_GET['user_id'];
+
+	$tag_id = $_POST['tag_id'];
+	$user_id = $_POST['user_id'];
 	$response = array();
 
 	

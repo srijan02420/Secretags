@@ -18,11 +18,11 @@ class Home extends CI_Controller {
 				$this->load->view('home_view',$data);
 			}
 			else
-				header ('Location: http://riklr.com/landing?back=1');
+				header ('Location: http://localhost/Secretags/landing?back=1');
 			
 		}
 		else
-			header ('Location: http://riklr.com/landing');
+			header ('Location: http://localhost/Secretags/landing');
 			
 		
 	}
@@ -39,7 +39,7 @@ class Home extends CI_Controller {
 			$this->load->view('profile_view',$data);
 		}
 		else
-			header ('Location: http://riklr.com/landing');
+			header ('Location: http://localhost/Secretags/landing');
 		
 	}
 	
@@ -53,7 +53,7 @@ class Home extends CI_Controller {
 			$this->load->view('recent_view',$data);
 		}
 		else
-			header ('Location: http://riklr.com/landing');
+			header ('Location: http://localhost/Secretags/landing');
 		
 	}
 	

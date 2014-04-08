@@ -3,7 +3,7 @@ function get_tags_friends(user_id){
 		 //alert('helo');
 		$('.search-query').typeahead({
 			source: function (query, process) {
-				return $.get("http://riklr.com/json/json_get_tags_friends.php",{ query: query , user_id : user_id}, function (data) {
+				return $.get("http://localhost/Secretags/json/json_get_tags_friends.php",{ query: query , user_id : user_id}, function (data) {
 				//alert(data);
 					students = JSON.parse(data);
 					var results = _.map(students, function(product) {
@@ -35,9 +35,9 @@ function get_tags_friends(user_id){
                    return p.tag == tag;
                 });
 				if(product.tag_friend==0)
-					window.location.assign('http://riklr.com/tags/tag/'+product.tag_id);
+					window.location.assign('http://localhost/Secretags/tags/tag/'+product.tag_id);
 				else
-					window.location.assign('http://riklr.com/home/profile/'+product.tag_id);
+					window.location.assign('http://localhost/Secretags/home/profile/'+product.tag_id);
             }
  
         });

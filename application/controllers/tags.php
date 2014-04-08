@@ -24,7 +24,7 @@ class Tags extends CI_Controller {
 			$this->load->view('tag_view',$data);
 		}
 		else
-			header ('Location: http://riklr.com/landing');
+			header ('Location: http://localhost/Secretags/landing');
 		
 	}
 }

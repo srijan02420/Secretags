@@ -4,7 +4,7 @@
 				{
 					
 					// Open an AJAX call to the server's Long Poll PHP file
-					$.get("http://riklr.com/json/json_get_points.php", 
+					$.get("http://localhost/Secretags/json/json_get_points.php", 
 					//async = true,
 					{ user_id : user_id})
 					.done(function(data)

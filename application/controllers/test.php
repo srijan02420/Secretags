@@ -28,7 +28,7 @@ class Test extends CI_Controller {
 			$this->load->view('test_view',$data);
 		}
 		else
-			header ('Location: http://riklr.com/landing');
+			header ('Location: http://localhost/Secretags/landing');
 			
 		
 	}
@@ -45,7 +45,7 @@ class Test extends CI_Controller {
 			$this->load->view('profile_view',$data);
 		}
 		else
-			header ('Location: http://riklr.com/landing');
+			header ('Location: http://localhost/Secretags/landing');
 		
 	}
 	
@@ -59,7 +59,7 @@ class Test extends CI_Controller {
 			$this->load->view('recent_view',$data);
 		}
 		else
-			header ('Location: http://riklr.com/landing');
+			header ('Location: http://localhost/Secretags/landing');
 		
 	}
 	

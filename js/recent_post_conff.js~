@@ -38,7 +38,7 @@
 			function getData() {
 				
 				// Post data to ajax.php
-				$.post('http://localhost/Secretags/json/json_get_home_conff.php', {
+				$.post('http://localhost/Secretags/json/json_get_recent_conff.php', {
 						
 					action        : 'scrollpagination',
 				    number        : $settings.nop,
@@ -46,7 +46,7 @@
 				    offset        : offset,
 									    
 				}, function(data) {
-						
+						alert(data);
 					// Change loading bar all_posts (it may have been altered)
 					$('.loading-bar').hide();
 					conffs = JSON.parse(data);
@@ -139,9 +139,9 @@
 											conf.conff = conf.conff.substring(0,500) + '.....<a href="http://localhost/Secretags/secretpost/post/'+conf.conff_id+'">continue reading</a>';
 										 else if(conf.conff.length > 500 && conf.conff.length < 2000)	
 											conf.conff = conf.conff.substring(0,500) + '.....<a onClick="makeitbig('+text+','+conf.conff_id+'); return false;"  >continue reading</a>';
-										
+												
 												varhtml =
-												special+
+												
 									'<a class="pull-left" href="http://localhost/Secretags/secretpost/post/'+conf.conff_id+'" style = "margin-left:10px; margin-top:10px; background:white; border-radius:4px; box-shadow: 0px 0px 10px #000000;"><img src="http://localhost/Secretags/images/'+conf.gender+'.jpg" class="media-object" width = "84px" style = " border-radius:4px;"></a>'+
 									'<img src="http://localhost/Secretags/images/type_'+conf.type+'.png" width="30px" height="30px" style="margin-top:79px; margin-left:-32px; position:absolute;">'+
 								'<div class="media-body" style = "margin-right:10px; margin-top:10px; margin-bottom:10px; background: rgba(255,255,255,0.6); border-radius:2px; box-shadow: 0px 0px 10px #171717;">'+
@@ -214,7 +214,6 @@
 									// else
 									// {				
 										$('#all_posts').append('<li class="media" id="conff'+conf.conff_id+'">'+varhtml+'</li>');
-										
 									// }
 						
 							}	
@@ -266,4 +265,5 @@
 			
 		});
 	}
+
 })(jQuery);

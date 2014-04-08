@@ -34,9 +34,9 @@ else
 	 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# riklrapp: http://ogp.me/ns/fb/riklrapp#">
   <meta property="fb:app_id" content="481439511903117" /> 
   <meta property="og:type"   content="riklrapp:post" /> 
-  <meta property="og:url"    content="http://riklr.com/secretpost/post/<?=$id?>" /> 
+  <meta property="og:url"    content="http://localhost/Secretags/secretpost/post/<?=$id?>" /> 
 	  <meta property="og:title"  content="<?=$type?>" /> 
-	  <meta property="og:image"  content="http://riklr.com/images/<?=$gender?>.jpg" /> 
+	  <meta property="og:image"  content="http://localhost/Secretags/images/<?=$gender?>.jpg" /> 
 	  <meta property="og:description"  content="<?=$conffe?>" /> 
 	<meta property="og:site_name" content="Secertags" />
 	<meta property="fb:admins" content="100001010584091" />
@@ -45,7 +45,7 @@ else
 	
     <style>
       body {
-        background: url('http://riklr.com/images/dottedtexture5.jpg');
+        background: url('http://localhost/Secretags/images/dottedtexture5.jpg');
 		background-repeat:repeat-y;
 		background-size:100% 28px;
 		background-attachment:fixed;
@@ -148,10 +148,10 @@ else
 				fb += ','+friends[a].id; 
 			}
 			//alert(fb);
-			$.post("http://riklr.com/signup/register", { name: name, email: email,gender: gender, id: id, location: location, pic: picture,friends: fb } )
+			$.post("http://localhost/Secretags/signup/register", { name: name, email: email,gender: gender, id: id, location: location, pic: picture,friends: fb } )
 			.done(function(data) {
 				$( "#loading" ).hide();
-				self.location="http://riklr.com/session?id="+id+"&url=http://riklr.com/secretpost/post/<?=$id?>";
+				self.location="http://localhost/Secretags/session?id="+id+"&url=http://localhost/Secretags/secretpost/post/<?=$id?>";
 			});
 			
 		}
@@ -179,14 +179,14 @@ var tags = new Array();
 		$(document).keydown(function(e){
 			if (e.keyCode == 37) {
 				if (!$(".comment_box").is(':focus')) {
-					window.location = "http://riklr.com/secretpost/post/<?=$id-1?>?go="+0;
+					window.location = "http://localhost/Secretags/secretpost/post/<?=$id-1?>?go="+0;
 					}
 			}
 		});
 		$(document).keydown(function(e){
 			if (e.keyCode == 39) { 
 				if (!$(".comment_box").is(':focus')) {
-					window.location = "http://riklr.com/secretpost/post/<?=$id+1?>?go="+1;
+					window.location = "http://localhost/Secretags/secretpost/post/<?=$id+1?>?go="+1;
 					}
 			}
 		});
@@ -195,7 +195,7 @@ var tags = new Array();
 			if(user_id == '0')
 				$('#postlogin').modal();
 			else
-				window.location = "http://riklr.com/tags/tag/"+tag_id;
+				window.location = "http://localhost/Secretags/tags/tag/"+tag_id;
 		}
 		
 		function showCommp(conff_id){
@@ -254,7 +254,7 @@ margin:0 auto;}
 
 </style>
 <!-- Fav and touch icons -->
-    <link rel="shortcut icon" href="http://riklr.com/images/fav.png">
+    <link rel="shortcut icon" href="http://localhost/Secretags/images/fav.png">
   </head>
   
   <body>
@@ -262,13 +262,13 @@ margin:0 auto;}
 	<script src="<?=site_url('js/fb_post.js')?>"></script>
 <!--header-->
 	<div id="loading">
-		<img src="http://riklr.com/images/downloader.gif"/>
+		<img src="http://localhost/Secretags/images/downloader.gif"/>
 	</div>
     <div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container" style="width:90%;">
 				 
-				  <a class="brand" href="<?=site_url('home')?>"> <img src="http://riklr.com/images/logo.png" class="pull-left" width = "35px" ></a>
+				  <a class="brand" href="<?=site_url('home')?>"> <img src="http://localhost/Secretags/images/logo.png" class="pull-left" width = "35px" ></a>
 				  <a class="brand" href="<?=site_url('home')?>"><strong>Riklr</strong></a>
 				  <div class="nav-collapse collapse">
 					<ul class="nav">
@@ -321,8 +321,8 @@ margin:0 auto;}
 		    	<div id="all_posts" class="media-list">
 					
 				</div>
-				<a href="http://riklr.com/secretpost/post/<?=$id-1?>" class="pull-left"><i class="icon-chevron-left"></i><span class="label label-inverse">Back</span></a>
-				<a href="http://riklr.com/secretpost/post/<?=$id+1?>" class="pull-right"><span class="label label-inverse">Next</span><i class="icon-chevron-right"></i></a>
+				<a href="http://localhost/Secretags/secretpost/post/<?=$id-1?>" class="pull-left"><i class="icon-chevron-left"></i><span class="label label-inverse">Back</span></a>
+				<a href="http://localhost/Secretags/secretpost/post/<?=$id+1?>" class="pull-right"><span class="label label-inverse">Next</span><i class="icon-chevron-right"></i></a>
 				<!--Posts content ends-->
 			</div>
 	

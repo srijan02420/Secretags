@@ -220,7 +220,7 @@
 		}
 		
 		function follow_tag(tag_id,user_id){
-		//alert(tag_id);
+		alert(tag_id);
 		   $.post("http://localhost/Secretags/post/follow_tag", { tag_id: tag_id ,user_id : user_id} )
 			.done(function(data) {
 				location.reload();

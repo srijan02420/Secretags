@@ -39,7 +39,7 @@
 			function getData() {
 				
 				// Post data to ajax.php
-				$.post('http://riklr.com/json/json_get_profile_conff.php', {
+				$.post('http://localhost/Secretags/json/json_get_profile_conff.php', {
 						
 					action        : 'scrollpagination',
 				    number        : $settings.nop,
@@ -75,7 +75,7 @@
 									
 									tags = ' ';taglist = ' ';
 								for(var i=0;i<conf.tags.length;i++)
-									{tags += '<a href="http://riklr.com/tags/tag/'+conf.tags[i].tag_id+'"><li class="label label-inverse" ><div style = "padding: 4px; font-size:16px;">#'+conf.tags[i].tag+'</div></li></a>'+
+									{tags += '<a href="http://localhost/Secretags/tags/tag/'+conf.tags[i].tag_id+'"><li class="label label-inverse" ><div style = "padding: 4px; font-size:16px;">#'+conf.tags[i].tag+'</div></li></a>'+
 									' ';taglist = taglist + '#' + conf.tags[i].tag;} 
 									
 									if(tags!=' ')
@@ -92,9 +92,9 @@
 										else
 										comment_liked = 'Like';
 										var com_photo = comm.photo;
-										var link = 'http://riklr.com/home/profile/'+comm.user_id;
+										var link = 'http://localhost/Secretags/home/profile/'+comm.user_id;
 										if(comm.gender != 0)
-											{com_photo = 'http://riklr.com/images/'+comm.gender+'.jpg';
+											{com_photo = 'http://localhost/Secretags/images/'+comm.gender+'.jpg';
 											link = '#';
 											if(comm.gender == 1)
 												comm.user_name = 'Anon male';
@@ -129,23 +129,23 @@
 									var special = '';
 									if(conf.profile_commented==true)
 										{
-										special = '<strong style = "font-size:18px; margin-right: 10px;"><a href="http://riklr.com/test/profile/'+conf.profile_id+'" style = "color:#002E5C;">'+conf.profile_name+'</a> commented on a post</strong></br>';
+										special = '<strong style = "font-size:18px; margin-right: 10px;"><a href="http://localhost/Secretags/test/profile/'+conf.profile_id+'" style = "color:#002E5C;">'+conf.profile_name+'</a> commented on a post</strong></br>';
 										}
 									else {
 										if(conf.liker.length != 0)
 											{
-											special = '<strong style = "font-size:18px; margin-right: 10px;"><a href="http://riklr.com/test/profile/'+conf.profile_id+'" style = "color:#002E5C;">'+conf.profile_name+'</a> liked a post</strong></br>';
+											special = '<strong style = "font-size:18px; margin-right: 10px;"><a href="http://localhost/Secretags/test/profile/'+conf.profile_id+'" style = "color:#002E5C;">'+conf.profile_name+'</a> liked a post</strong></br>';
 											}
 										 }
 										var text = "'"+escape(conf.conff)+"'";
 										 if(conf.conff.length > 2000)
-											conf.conff = conf.conff.substring(0,500) + '.....<a href="http://riklr.com/secretpost/post/'+conf.conff_id+'">continue reading</a>';
+											conf.conff = conf.conff.substring(0,500) + '.....<a href="http://localhost/Secretags/secretpost/post/'+conf.conff_id+'">continue reading</a>';
 										 else if(conf.conff.length > 500 && conf.conff.length < 2000)	
 											conf.conff = conf.conff.substring(0,500) + '.....<a onClick="makeitbig('+text+','+conf.conff_id+'); return false;"  >continue reading</a>';
 												varhtml =
 												special+
-									'<a class="pull-left" href="http://riklr.com/secretpost/post/'+conf.conff_id+'" style = "margin-left:10px; margin-top:10px; background:white; border-radius:4px; box-shadow: 0px 0px 10px #000000;"><img src="http://riklr.com/images/'+conf.gender+'.jpg" class="media-object" width = "84px" style = " border-radius:4px;"></a>'+
-									'<img src="http://riklr.com/images/type_'+conf.type+'.png" width="30px" height="30px" style="margin-top:79px; margin-left:-32px; position:absolute;">'+
+									'<a class="pull-left" href="http://localhost/Secretags/secretpost/post/'+conf.conff_id+'" style = "margin-left:10px; margin-top:10px; background:white; border-radius:4px; box-shadow: 0px 0px 10px #000000;"><img src="http://localhost/Secretags/images/'+conf.gender+'.jpg" class="media-object" width = "84px" style = " border-radius:4px;"></a>'+
+									'<img src="http://localhost/Secretags/images/type_'+conf.type+'.png" width="30px" height="30px" style="margin-top:79px; margin-left:-32px; position:absolute;">'+
 								'<div class="media-body" style = "margin-right:10px; margin-top:10px; margin-bottom:10px; background: rgba(255,255,255,0.6); border-radius:2px; box-shadow: 0px 0px 10px #171717;">'+
 								'<ul class="media inline" style = "margin: 8px; ">'+
 										tags+
